@@ -7,14 +7,16 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		char pistaSecreta []= new char [20];
 		
 		
-		Scanner read= new Scanner(System.in);
+			
+		Buscaminas.letrerosComienzo();
+		System.out.println (Arrays.toString(Buscaminas.colocMinas()));
+		System.out.println (Arrays.toString(Buscaminas.pistaSecret()));
+		Buscaminas.juego();
 		
 		
-
-		System.out.println(Arrays.toString(Buscaminas.colocMinas()));
+		
 
 	}
 

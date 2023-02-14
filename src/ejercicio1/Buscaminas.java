@@ -1,7 +1,16 @@
 package ejercicio1;
 
-public class Buscaminas {
+import java.util.Arrays;
+import java.util.Scanner;
 
+public class Buscaminas {
+	
+	static Scanner read= new Scanner(System.in);
+
+	static int posicion;
+	
+	static char pistaSecreta []= new char [20];
+	
 	//Cantidad de minas disponibles
 	public static int numMina=6; 
 
@@ -81,6 +90,39 @@ public class Buscaminas {
 				pista[i] = '0';
 			}
 		}	
+	}
+	
+	static void juego () {
+		int contadorJugada=20;
+		do {
+			System.out.println("Elija una posición a destapar:");
+			posicion= read.nextInt();
+			pistaSecreta[posicion]=pista[posicion];
+			contadorJugada--;
+			System.out.println(Arrays.toString(Buscaminas.pistaSecreta));
+			
+			if (contadorJugada==6 && pistaSecreta[posicion]!=mina) {
+				System.out.println("Has ganado");
+				break;
+				}
+		}while (pistaSecreta[posicion]!= mina);
+			
+		if (pistaSecreta[posicion]==mina) {
+			System.out.println("Has perdido");
+		}
+	}
+	
+	static void letrerosComienzo () {
+		System.out.println("BUSCAMINAS");
+		System.out.println("¡¡Que comience el juego!!");
+		System.out.println();
+	}
+	
+	static char [] pistaSecret () {
+		for (int i =0; i< pistaSecreta.length;i++) {
+			pistaSecreta[i]= '?';
+		}
+		return pistaSecreta;
 	}
 }
 	
