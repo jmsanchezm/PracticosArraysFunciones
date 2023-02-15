@@ -37,20 +37,18 @@ public class SieteYMedia {
 	/**
 	 * Método que generará la carta aleatoria
 	 */
+	
 	static void cartaAleatoria () {
 		//Declaramos las variables necesarias
 		int puntPos; //Se guardará la posición del array que nos dará el número de la carta
 		int paloPos; // Se guardará la posición del array que nos dará el palo de la carta
-		double punto; //Se guardará la puntuación de la carta seleccionada
 		String palo; //Se guardará el nombre del palo
 		String media; //Se guardará el nombre de la media
 		int mediaPos; //Se guardará la posición del array que nos dará el nombre de la media
 		
-		//Mientras que la decisión del jugador sea si
-		while (decision.equals("si") && sigueJugada) {
 			//Generaremos posiciones 
-			puntPos= (int)Math.random()*puntos.length;
-			paloPos=(int)Math.random()*palos.length;
+			puntPos= (int)(Math.random()*puntos.length);
+			paloPos=(int)(Math.random()*palos.length);
 			
 			//Igualamos el contenido de la posición de cada array a cada una de las variables
 			palo = palos [paloPos];
@@ -68,85 +66,63 @@ public class SieteYMedia {
 				//Mostrará la puntuación de la carta con su debido palo
 				System.out.println("La carta es " + punto + " de " + palo);
 			}
+			
 		}
-	}
+
 	
 	/**
 	 * Método para el turno del jugador 1
 	 */
 	static void jugadaJug1 () {
 		
-		//Ordeno que haga
-		do {
-		//Pido si quiere carta
-		System.out.println("Jugador 1, ¿desea una carta? (si/no)");
-		//Lee respuesta
-		decision = read.next();
-		//Llamo a la función la cuál me dará la carta aleatoria
-		cartaAleatoria ();
-		//Sumamos la puntuación
-		sumaJ1+=punto;
-		//Mientras que la respuesta sea distinta de no
-		}while (decision.equals("si"));
-		//Le muestro la suma total de la puntuacion de las cartas que han ido saliendo
-		System.out.println( "La suma de los puntos es"+sumaJ1);
-		sigueJugada=false;
+		while (decision.equals("si")) {
+			
+			SieteYMedia.cartaAleatoria();
+			sumaJ1+=punto;
+			System.out.println("Tienes " + sumaJ1 + " puntos");
+			if (sumaJ1 > LIMITE) {
+				System.out.println("Has perdido, te has pasado...");
+				System.out.println("Ha ganado Jugador 1");
+				break;
+			}
+			
+			System.out.println("Jugador 1, ¿desea otra carta? (si/no)");
+			SieteYMedia.decision = read.next();
+			SieteYMedia.decision.toLowerCase();
+			System.out.println();
+		}
 	}
 	
 	static void jugadaJug2 () {
-		//Ordeno que haga
-		do {
-			//Pido si quiere carta
-			System.out.println("Jugador 2, ¿desea una carta? (si/no)");
-			//Lee respuesta
-			decision = read.next();
-			//Llamo a la función la cuál me dará la carta aleatoria
-			cartaAleatoria ();
-			//Sumamos la puntuación
+		punto=0;
+		while (decision.equals("si")) {		
+			
+			SieteYMedia.cartaAleatoria();
 			sumaJ2+=punto;
-			//Mientras que la respuesta sea distinta de no
-			}while (decision.equals("si"));
-			//Le muestro la suma total de la puntuacion de las cartas que han ido saliendo.
-			System.out.println( "La suma de los puntos es"+ sumaJ2);
-			sigueJugada=false;
-
-	}
-	
-	/**
-	 * Método para comprobar ganador o empate
-	 */
-	static void comprobacion () {
-		/*Creamos las variables auxiliares se inicializaran
-		*con la diferencia del limite y la suma de sus puntos
-		*/
-		double auxJ1 = 7.5 -sumaJ1; //Se inicializaran con la diferencia del limite y la suma
-        double auxJ2 = 7.5 - sumaJ2;
-		
-		//Si las dos puntuaciones son igual al limite
-		if (sumaJ1==LIMITE && sumaJ2==LIMITE) {
-			//Mostrará empate
-			System.out.println("EMPATE");
-			//Le damos valor true
-			ganador=true;
-			
-			//Si la suma del jugador 1 es menor que el limite y la suma del jugador 2 se pasa del límite. 
-			//O si la diferencia es menor que la del Jugador 1 
-		} else if (sumaJ1>LIMITE && sumaJ2<=LIMITE ||auxJ2<auxJ1) {
-			//Mostrará que ha ganado el jugador 2
-			System.out.println("HA GANADO EL JUGADOR 2");
-			//Le damos valor true
-			ganador=true;
-			
-			//Si la suma del jugador 2 es mayor que el limite y la suma del jugador se pasa del limite.
-			//O si la diferencia es manor que la del Jugador 2
-		}else if (sumaJ2>LIMITE && sumaJ1<=LIMITE || auxJ1<auxJ2) {
-			//Mostrará que ha ganado el jugador 1
-			System.out.println("HA GANADO EL JUGADOR 1");
-			//Le damos valor true
-			ganador=true;
+			System.out.println("Tienes " + sumaJ2 + " puntos");
+			if (sumaJ1 > LIMITE) {
+				System.out.println("Has perdido, te has pasado...");
+				System.out.println("Ha ganado Jugador 1");
+				break;
+			}
+			System.out.println("Jugador 2, ¿desea otra carta? (si/no)");
+			SieteYMedia.decision = read.next();
+			SieteYMedia.decision.toLowerCase();
+			System.out.println();
 		}
 	}
-
+	
+	public static void esGanador() {
+		if (decision.equals("no")) {
+			if (sumaJ1 > sumaJ2) {
+				System.out.println("HA GANADO JUGADOR 1");
+			}else if (sumaJ2 > sumaJ1) {
+				System.out.println("HA GANADO JUGADOR 2");
+			}else if (sumaJ1 == sumaJ2) {
+				System.out.println("¡¡EMPATE!!");
+			}
+		}
+	}
 	
 	
 }

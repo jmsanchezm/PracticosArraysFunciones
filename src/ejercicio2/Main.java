@@ -4,14 +4,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("JUEGO DE LAS SIETE Y MEDIA");
-		System.out.println("¡¡Qué comience el juego!!");
-		do {
-			SieteYMedia.jugadaJug1();
-			SieteYMedia.jugadaJug2();
-			SieteYMedia.comprobacion();
-		}while (!SieteYMedia.ganador);
-
+		System.out.println("Jugador 1, ¿desea una carta? (si/no)");
+		SieteYMedia.decision=SieteYMedia.read.next();
+		SieteYMedia.decision.toLowerCase();
+		SieteYMedia.jugadaJug1();
+		
+		if (SieteYMedia.decision.equals("no")) {
+			System.out.println("Jugador 2, ¿desea una carta? (si/no)");
+			SieteYMedia.decision=SieteYMedia.read.next();
+			SieteYMedia.decision.toLowerCase();
+		}
+		SieteYMedia.jugadaJug2();
+		
+		SieteYMedia.esGanador();
 	}
 
 }
