@@ -121,12 +121,14 @@ public class Buscaminas {
 				break;
 				}
 		//Mientras que el valor de la posición sea distinto a una mina
-		}while (pistaSecreta[posicion]!= mina);
+		}while (contadorJugada==6 && pistaSecreta[posicion]!= mina);
 			
 		//En caso de que el contenido de la posición sea una mina
 		if (pistaSecreta[posicion]==mina) {
 			//El jugador, habrá perdido
 			System.out.println("Has perdido");
+		}else {
+			System.out.println("Has ganado");
 		}
 	}
 	
